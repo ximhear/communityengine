@@ -195,6 +195,7 @@ class PostsController < BaseController
     @rss_url = popular_rss_url
     respond_to do |format|
       format.html # index.rhtml
+      format.json {render json: @posts}
       format.rss {
         render_rss_feed_for(@posts, { :feed => {:title => @rss_title, :link => popular_url},
           :item => {:title => :title, :link => Proc.new {|post| user_post_url(post.user, post)}, :description => :post, :pub_date => :published_at}

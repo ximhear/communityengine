@@ -13,7 +13,9 @@ class SessionsController < BaseController
   end
 
   def create
+    logger.debug "[Sessions] create"
     @user_session = UserSession.new(:login => params[:email], :password => params[:password], :remember_me => params[:remember_me])
+    logger.debug "[Sessions] user session : #{@user_session}"
 
     if @user_session.save
       self.current_user = @user_session.record #if current_user has been called before this, it will ne nil, so we have to make to reset it
